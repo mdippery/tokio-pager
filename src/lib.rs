@@ -11,10 +11,9 @@
 //! child process, exits before the pager, leaving dangling file descriptors
 //! and the aforementioned I/O error from Tokio.
 //!
-//! Unfortunately, there isn't a great away to customize the behavior of
-//! the pager crate, so this module implements a [`Pager`] struct that
-//! allows the use of a pager subprocess in a way that plays nicely with
-//! Tokio.
+//! There isn't a great away to customize the behavior of the pager crate, so
+//! this module implements a [`Pager`] struct that allows the use of a pager
+//! subprocess in a way that plays nicely with Tokio.
 //!
 //! `Pager` pipes its output to program specified in the `$PAGER`
 //! environment variable, except under two conditions:

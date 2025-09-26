@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = ["Michael Dippery <michael@monkey-robot.com>"]
 description = "An asynchronous, Tokio-friendly pager implementation"
 documentation = "https://docs.rs/tokio-pager"
-#readme
+readme = "README.md"
 #repository
 #homepage
 keywords = ["cli", "less", "pager", "terminal", "tui"]
