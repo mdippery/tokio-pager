@@ -1,11 +1,11 @@
 [package]
 name = "tokio-pager"
-version = "1.0.0"
+version = "1.0.1-alpha.1"
 authors = ["Michael Dippery <michael@monkey-robot.com>"]
 description = "An asynchronous, Tokio-friendly pager implementation"
 documentation = "https://docs.rs/tokio-pager"
 readme = "README.md"
-#repository
+repository = "https://github.com/mdippery/tokio-pager"
 #homepage
 keywords = ["cli", "less", "pager", "terminal", "tui"]
 categories = ["command-line-interface"]
