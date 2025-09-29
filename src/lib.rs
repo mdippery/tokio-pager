@@ -42,7 +42,7 @@ use tokio::process::Command;
 /// An environmental variable consisting of a name-value pair.
 pub type EnvVar = (String, String);
 
-/// A tokio-friendly asynchronous pager.
+/// A Tokio-friendly asynchronous pager.
 #[derive(Debug)]
 pub struct Pager {
     pager_env: PagerEnv,
@@ -254,7 +254,10 @@ impl PagerEnv {
     /// Controls whether the pager is outputting single-line output or not,
     /// which may alter aspects of its configuration or behavior.
     ///
-    /// Pass true if the `--oneline` option was specified on the command line.
+    /// Oneline mode may be used when printing a listing of items, such as
+    /// when running `git log --oneline`. In these cases, output will not
+    /// be wrapped; horizontal scrolling will be required to view long strings.
+    /// See [`PagerEnv::pager_env()`] for more discussion.
     pub fn oneline(self, oneline: bool) -> Self {
         Self { oneline }
     }
@@ -273,8 +276,9 @@ impl PagerEnv {
     /// By default, this is `FSRX`, unless the user has defined `$LESS` in the
     /// environment. However, because text is printed in color, `R` is always
     /// included regardless of the value of `$LESS` (it is appended to `$LESS` if
-    /// not already present), and when output is printed to oneline (via the
-    /// `--oneline` option), `S` is appended to `$LESS` if not already present.
+    /// not already present), and when output is printed to
+    /// [one line](PagerEnv::oneline()), `S` is appended to `$LESS` if not
+    /// already present.
     ///
     /// This ensures that output is pleasant for the user, regardless of the
     /// definition of `$LESS`.
