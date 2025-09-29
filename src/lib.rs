@@ -59,7 +59,7 @@ impl Pager {
     /// # Examples
     ///
     /// ```
-    /// use tokio_pager::{Pager, PagerEnv};
+    /// # use tokio_pager::{Pager, PagerEnv};
     /// # use temp_env::with_var_unset;
     /// # with_var_unset("LESS", || {
     /// let command = Pager::new(PagerEnv::default()).command();
@@ -76,7 +76,7 @@ impl Pager {
     /// # Examples
     ///
     /// ```
-    /// use tokio_pager::{Pager, PagerEnv};
+    /// # use tokio_pager::{Pager, PagerEnv};
     /// # use temp_env::with_var_unset;
     /// # with_var_unset("LESS", || {
     /// let (name, value) = Pager::new(PagerEnv::default()).env().unwrap();
@@ -242,6 +242,34 @@ pub type Result = result::Result<(), String>;
 // default option of "FSRX is used.
 
 /// Retrieves the pager and pager configuration from the environment.
+///
+/// # Examples
+///
+/// `PagerEnv` structs are created using a builder pattern, allowing for
+/// a wide range of options to be configured by chaining configuration
+/// options.
+///
+/// For example, to create a pager environment that is configured to neatly
+/// print elements of output to single lines, such as when emulating the
+/// behavior of `git log --oneline`:
+///
+/// ```
+/// # use tokio_pager::PagerEnv;
+/// let pager_env = PagerEnv::default().oneline(true);
+/// ```
+///
+/// Or to do the opposite: configure a pager that will not print a listing
+/// of output to a single line, the default:
+///
+/// ```
+/// # use tokio_pager::PagerEnv;
+/// let pager_env = PagerEnv::default().oneline(false);
+/// ```
+///
+/// Currently, there is only one option, so the builder pattern is not particularly
+/// useful, but as additional options are added to `PagerEnv`, this pattern
+/// will allow a great amount of flexibility when creating `PagerEnv` instances,
+/// so know the pattern well.
 #[derive(Debug, Default)]
 pub struct PagerEnv {
     oneline: bool,
@@ -288,7 +316,7 @@ impl PagerEnv {
     /// `pager_env` will return a default value if `$LESS` is not set:
     ///
     /// ```
-    /// use tokio_pager::PagerEnv;
+    /// # use tokio_pager::PagerEnv;
     /// # use temp_env::with_var_unset;
     /// # with_var_unset("LESS", || {
     /// let (key, value) = PagerEnv::default().pager_env().unwrap();
@@ -300,7 +328,7 @@ impl PagerEnv {
     /// It will include `S` if `oneline` is `true`:
     ///
     /// ```
-    /// use tokio_pager::PagerEnv;
+    /// # use tokio_pager::PagerEnv;
     /// # use temp_env::with_var_unset;
     /// # with_var_unset("LESS", || {
     /// let (_, value) = PagerEnv::default().oneline(true).pager_env().unwrap();
@@ -311,7 +339,7 @@ impl PagerEnv {
     /// In this example, `$LESS` was set to `SX`, but `R` will be appended anyway:
     ///
     /// ```
-    /// use tokio_pager::PagerEnv;
+    /// # use tokio_pager::PagerEnv;
     /// # use temp_env::with_var;
     /// # with_var("LESS", Some("SX"), || {
     /// let (_, value) = PagerEnv::default().pager_env().unwrap();
@@ -323,7 +351,7 @@ impl PagerEnv {
     /// but `$LESS` was not altered since `R` was already in it:
     ///
     /// ```
-    /// use tokio_pager::PagerEnv;
+    /// # use tokio_pager::PagerEnv;
     /// # use temp_env::with_var;
     /// # with_var("LESS", Some("RSX"), || {
     /// let (_, value) = PagerEnv::default().pager_env().unwrap();
@@ -335,7 +363,7 @@ impl PagerEnv {
     /// `true`, `S` is also appended:
     ///
     /// ```
-    /// use tokio_pager::PagerEnv;
+    /// # use tokio_pager::PagerEnv;
     /// # use temp_env::with_var;
     /// # with_var("LESS", Some("R"), || {
     /// let (_, value) = PagerEnv::default().oneline(true).pager_env().unwrap();
@@ -348,7 +376,7 @@ impl PagerEnv {
     /// value of `$LESS` does not change:
     ///
     /// ```
-    /// use tokio_pager::PagerEnv;
+    /// # use tokio_pager::PagerEnv;
     /// # use temp_env::with_var;
     /// # with_var("LESS", Some("SR"), || {
     /// let (_, value) = PagerEnv::default().oneline(true).pager_env().unwrap();
