@@ -33,9 +33,9 @@
 //!
 //! [pager]: https://crates.io/crates/pager
 
-use atty::Stream;
 use std::process::{ExitStatus, Stdio};
-use std::{env, io, result};
+use std::{env, result};
+use std::io::{self, IsTerminal};
 use tokio::io::AsyncWriteExt;
 use tokio::process::Command;
 
@@ -140,7 +140,7 @@ impl Pager {
 
     /// True if stdout is a tty.
     pub fn is_tty(&self) -> bool {
-        atty::is(Stream::Stdout)
+        io::stdout().is_terminal()
     }
 
     /// Pages the output to the pager.
