@@ -223,7 +223,7 @@ dependencies = [
 
 [[package]]
 name = "tokio-pager"
-version = "1.0.1-beta.1"
+version = "1.0.1"
 dependencies = [
  "temp-env",
  "tokio",
