@@ -11,6 +11,7 @@ keywords = ["cli", "less", "pager", "terminal", "tui"]
 categories = ["command-line-interface"]
 license = "MIT"
 edition = "2024"
+rust-version = "1.85.1"
 
 [dependencies]
 tokio = { version = "1.47.1", features = ["process", "io-util"] }
