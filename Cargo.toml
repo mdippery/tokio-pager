@@ -14,7 +14,7 @@ edition = "2024"
 rust-version = "1.85.1"
 
 [dependencies]
-tokio = { version = "1.47.1", features = ["process", "io-util"] }
+tokio = { version = "1.52.3", features = ["process", "io-util"] }
 
 [dev-dependencies]
 temp-env = "0.3.6"
