@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// Copyright (C) 2025 Michael Dippery <michael@monkey-robot.com>
+// Copyright (C) 2025-2026 Michael Dippery <michael@monkey-robot.com>
 
 //! Asynchronous, Tokio-friendly pager implementation.
 //!
@@ -36,6 +36,7 @@
 use std::process::{ExitStatus, Stdio};
 use std::{env, result};
 use std::io::{self, IsTerminal};
+use std::path::Path;
 use tokio::io::AsyncWriteExt;
 use tokio::process::Command;
 
@@ -135,7 +136,7 @@ impl Pager {
     /// # });
     /// ```
     pub fn is_cat(&self) -> bool {
-        self.command() == "cat" || self.command().ends_with("/cat")
+        Path::new(&self.command()).file_name().map(|s| s == "cat").unwrap_or(false)
     }
 
     /// True if stdout is a tty.
